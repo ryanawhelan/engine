@@ -331,22 +331,25 @@ public class TextInputPlugin implements ListenableEditingState.EditingStateWatch
     }
     outAttrs.imeOptions |= enterAction;
 
-    String[] imgTypeString = new String[] {
-      "image/png",
-      "image/bmp",
-      "image/jpg",
-      "image/tiff",
-      "image/gif",
-      "image/jpeg",
-      "image/webp"
-    };
-    EditorInfoCompat.setContentMimeTypes(outAttrs, imgTypeString);
-
     InputConnectionAdaptor connection =
         new InputConnectionAdaptor(
             view, inputTarget.id, textInputChannel, keyboardManager, mEditable, outAttrs);
     outAttrs.initialSelStart = mEditable.getSelectionStart();
     outAttrs.initialSelEnd = mEditable.getSelectionEnd();
+
+    if (configuration.contentCommitEnabled) {
+      String[] imgTypeString = new String[] {
+              "image/png",
+              "image/bmp",
+              "image/jpg",
+              "image/tiff",
+              "image/gif",
+              "image/jpeg",
+              "image/webp"
+      };
+      Log.v("flutter_engine_test", "Setting mime types...");
+      EditorInfoCompat.setContentMimeTypes(outAttrs, imgTypeString);
+    }
 
     lastInputConnection = connection;
     return lastInputConnection;

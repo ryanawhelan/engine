@@ -427,6 +427,7 @@ public class TextInputChannel {
         }
       }
       final Integer inputAction = inputActionFromTextInputAction(inputActionName);
+      Log.d("flutter_engine_test", "contentCommitEnabled: " + json.optBoolean("contentCommitEnabled").toString());
       return new Configuration(
           json.optBoolean("obscureText"),
           json.optBoolean("autocorrect", true),
@@ -436,7 +437,8 @@ public class TextInputChannel {
           inputAction,
           json.isNull("actionLabel") ? null : json.getString("actionLabel"),
           json.isNull("autofill") ? null : Autofill.fromJson(json.getJSONObject("autofill")),
-          fields);
+          fields,
+          json.optBoolean("contentCommitEnabled"));
     }
 
     @NonNull
@@ -586,6 +588,7 @@ public class TextInputChannel {
     @Nullable public final String actionLabel;
     @Nullable public final Autofill autofill;
     @Nullable public final Configuration[] fields;
+    public final boolean contentCommitEnabled;
 
     public Configuration(
         boolean obscureText,
@@ -596,7 +599,8 @@ public class TextInputChannel {
         @Nullable Integer inputAction,
         @Nullable String actionLabel,
         @Nullable Autofill autofill,
-        @Nullable Configuration[] fields) {
+        @Nullable Configuration[] fields,
+        boolean contentCommitEnabled) {
       this.obscureText = obscureText;
       this.autocorrect = autocorrect;
       this.enableSuggestions = enableSuggestions;
@@ -606,6 +610,7 @@ public class TextInputChannel {
       this.actionLabel = actionLabel;
       this.autofill = autofill;
       this.fields = fields;
+      this.contentCommitEnabled = cotentCommitEnabled;
     }
   }
 
