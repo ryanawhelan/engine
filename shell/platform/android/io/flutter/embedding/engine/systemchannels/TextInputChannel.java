@@ -427,7 +427,13 @@ public class TextInputChannel {
         }
       }
       final Integer inputAction = inputActionFromTextInputAction(inputActionName);
-      Log.d("flutter_engine_test", "contentCommitEnabled: " + json.optBoolean("contentCommitEnabled").toString());
+      final JSONArray mimeTypes = json.getJSONArray("contentCommitMimeTypes");
+      final String[] mimeTypeList = new String[mimeTypes.length()];
+
+      for (int i = 0; i < mimeTypeList.length; i++) {
+        mimeTypeList[i] = mimeTypes.getString(i);
+      }
+
       return new Configuration(
           json.optBoolean("obscureText"),
           json.optBoolean("autocorrect", true),
@@ -438,7 +444,7 @@ public class TextInputChannel {
           json.isNull("actionLabel") ? null : json.getString("actionLabel"),
           json.isNull("autofill") ? null : Autofill.fromJson(json.getJSONObject("autofill")),
           fields,
-          json.optBoolean("contentCommitEnabled"));
+          mimeTypeList);
     }
 
     @NonNull
@@ -588,7 +594,7 @@ public class TextInputChannel {
     @Nullable public final String actionLabel;
     @Nullable public final Autofill autofill;
     @Nullable public final Configuration[] fields;
-    public final boolean contentCommitEnabled;
+    @NonNull String[] contentCommitMimeTypes;
 
     public Configuration(
         boolean obscureText,
@@ -600,7 +606,7 @@ public class TextInputChannel {
         @Nullable String actionLabel,
         @Nullable Autofill autofill,
         @Nullable Configuration[] fields,
-        boolean contentCommitEnabled) {
+        @NonNull String[] contentCommitMimeTypes) {
       this.obscureText = obscureText;
       this.autocorrect = autocorrect;
       this.enableSuggestions = enableSuggestions;
@@ -610,7 +616,7 @@ public class TextInputChannel {
       this.actionLabel = actionLabel;
       this.autofill = autofill;
       this.fields = fields;
-      this.contentCommitEnabled = cotentCommitEnabled;
+      this.contentCommitMimeTypes = contentCommitMimeTypes;
     }
   }
 

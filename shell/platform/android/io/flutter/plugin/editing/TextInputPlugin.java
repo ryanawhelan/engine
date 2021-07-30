@@ -337,19 +337,9 @@ public class TextInputPlugin implements ListenableEditingState.EditingStateWatch
     outAttrs.initialSelStart = mEditable.getSelectionStart();
     outAttrs.initialSelEnd = mEditable.getSelectionEnd();
 
-    if (configuration.contentCommitEnabled) {
-      String[] imgTypeString = new String[] {
-              "image/png",
-              "image/bmp",
-              "image/jpg",
-              "image/tiff",
-              "image/gif",
-              "image/jpeg",
-              "image/webp"
-      };
-      Log.v("flutter_engine_test", "Setting mime types...");
-      EditorInfoCompat.setContentMimeTypes(outAttrs, imgTypeString);
-    }
+    String[] imgTypeString = configuration.contentCommitMimeTypes;
+    Log.v("flutter_engine_test", "Setting mime types to: " + imgTypeString.toString());
+    EditorInfoCompat.setContentMimeTypes(outAttrs, imgTypeString);
 
     lastInputConnection = connection;
     return lastInputConnection;
