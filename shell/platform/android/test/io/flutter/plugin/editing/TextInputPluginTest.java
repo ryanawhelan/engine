@@ -1357,7 +1357,7 @@ public class TextInputPluginTest {
             null,
             null,
             autofill,
-            new TextInputChannel.Configuration[] {config},
+            null,
             null));
 
     final ViewStructure viewStructure = mock(ViewStructure.class);
@@ -1520,7 +1520,7 @@ public class TextInputPluginTest {
             null,
             null,
             autofill1,
-            new TextInputChannel.Configuration[] {config1, config2},
+            null,
             null));
 
     final ViewStructure viewStructure = mock(ViewStructure.class);
@@ -1666,7 +1666,7 @@ public class TextInputPluginTest {
             null,
             null,
             autofill1,
-            new TextInputChannel.Configuration[] {config1, config2},
+            null,
             null);
 
     textInputPlugin.setTextInputClient(0, autofillConfiguration);
@@ -1799,7 +1799,7 @@ public class TextInputPluginTest {
             null,
             null,
             autofill1,
-            new TextInputChannel.Configuration[] {config1, config2},
+            null,
             null);
 
     textInputPlugin.setTextInputClient(0, autofillConfiguration);
@@ -1897,7 +1897,7 @@ public class TextInputPluginTest {
             null,
             null,
             autofill1,
-            new TextInputChannel.Configuration[] {config1, config2},
+            null,
             null);
 
     textInputPlugin.setTextInputClient(0, autofillConfiguration);
